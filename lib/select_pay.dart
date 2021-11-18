@@ -11,37 +11,20 @@ class selectPay extends StatelessWidget {
         children: [
           TextField(
             decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'Search'
-            ),
+                border: OutlineInputBorder(), hintText: 'Search'),
           ),
           Column(
             children: [
               Row(
                 children: [
                   Column(
-                    children: [
-                      Placeholder(
-                        
-                      ),
-                      Text("Name")
-                    ],
+                    children: [Placeholder(), Text("Name")],
                   ),
                   Column(
-                    children: [
-                      Placeholder(
-                        
-                      ),
-                      Text("Name")
-                    ],
+                    children: [Placeholder(), Text("Name")],
                   ),
                   Column(
-                    children: [
-                      Placeholder(
-                        
-                      ),
-                      Text("Name")
-                    ],
+                    children: [Placeholder(), Text("Name")],
                   )
                 ],
               )
@@ -49,6 +32,6 @@ class selectPay extends StatelessWidget {
           )
         ],
       ),
-    )
+    );
   }
 }
