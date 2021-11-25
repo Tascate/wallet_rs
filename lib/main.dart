@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart' as intl;
+import 'package:wallet_rs/select_pay.dart';
 import 'transaction.dart';
 import 'dashboard.dart';
 
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: const Color(0xFFF1F1F6),
         textTheme: GoogleFonts.varelaRoundTextTheme(),
       ),
-      home: const Dashboard(),
+      home: const selectPay(),
     );
   }
 }
