@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' as intl;
 import 'package:wallet_rs/select_pay.dart';
-import 'package:wallet_rs/top_up_choose.dart';
+import 'package:wallet_rs/top_up_choose_screen.dart';
 import 'transaction.dart';
 import 'user.dart';
 
@@ -81,11 +81,11 @@ class _DashboardState extends State<Dashboard> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           _buildButtonColumn(
-              lessThemeColor, Icons.near_me_outlined, 'Pay', const SelectPay()),
-          _buildButtonColumn(lessThemeColor, Icons.payments_outlined, 'Top-up',
-              const TopUpChoose()),
+              lessThemeColor, Icons.near_me_outlined, 'Pay', '/pay'),
+          _buildButtonColumn(
+              lessThemeColor, Icons.payments_outlined, 'Top-up', '/topup'),
           _buildButtonColumn(lessThemeColor, Icons.transform_outlined,
-              'Transfer', const SelectPay()),
+              'Transfer', '/transfer'),
         ],
       ),
     );
@@ -162,12 +162,10 @@ class _DashboardState extends State<Dashboard> {
     );
   }
 
-  _buildButtonColumn(
-      Color bgColor, IconData icon, String label, Widget screen) {
+  _buildButtonColumn(Color bgColor, IconData icon, String label, String route) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => screen));
+        Navigator.of(context).pushNamed(route);
       },
       child: Container(
         decoration: BoxDecoration(

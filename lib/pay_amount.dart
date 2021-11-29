@@ -84,7 +84,7 @@ class PayAmount extends StatelessWidget {
               height: 96,
             ),
             Text(
-              "How much will be sent to " + name + "?",
+              "How much to pay to " + name + "?",
               style: const TextStyle(
                 fontSize: 22,
               ),

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:wallet_rs/select_pay.dart';
+import 'package:wallet_rs/top_up_choose_screen.dart';
+import 'package:wallet_rs/transfer_amount_screen.dart';
 import 'dashboard.dart';
 
 void main() {
@@ -20,6 +23,13 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: const Color(0xFFF1F1F6),
         textTheme: GoogleFonts.varelaRoundTextTheme(),
       ),
+      initialRoute: '/db',
+      routes: {
+        '/db': (context) => Dashboard(),
+        '/pay': (context) => SelectPay(),
+        '/topup': (context) => TopUpChoose(),
+        '/transfer': (context) => TransferAmount(),
+      },
       home: const Dashboard(),
     );
   }
