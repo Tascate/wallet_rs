@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' as intl;
 import 'package:wallet_rs/select_pay.dart';
+import 'package:wallet_rs/top_up_choose.dart';
 import 'transaction.dart';
 import 'user.dart';
 
@@ -81,8 +82,8 @@ class _DashboardState extends State<Dashboard> {
         children: [
           _buildButtonColumn(
               lessThemeColor, Icons.near_me_outlined, 'Pay', const SelectPay()),
-          _buildButtonColumn(
-              lessThemeColor, Icons.money, 'Top-up', const SelectPay()),
+          _buildButtonColumn(lessThemeColor, Icons.payments_outlined, 'Top-up',
+              const TopUpChoose()),
           _buildButtonColumn(lessThemeColor, Icons.transform_outlined,
               'Transfer', const SelectPay()),
         ],
