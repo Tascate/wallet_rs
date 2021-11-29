@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' as intl;
+import 'package:wallet_rs/select_pay.dart';
 import 'transaction.dart';
 import 'user.dart';
 
@@ -78,10 +79,12 @@ class _DashboardState extends State<Dashboard> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          _buildButtonColumn(lessThemeColor, Icons.near_me_outlined, 'Pay'),
-          _buildButtonColumn(lessThemeColor, Icons.money, 'Top-up'),
           _buildButtonColumn(
-              lessThemeColor, Icons.transform_outlined, 'Transfer'),
+              lessThemeColor, Icons.near_me_outlined, 'Pay', const SelectPay()),
+          _buildButtonColumn(
+              lessThemeColor, Icons.money, 'Top-up', const SelectPay()),
+          _buildButtonColumn(lessThemeColor, Icons.transform_outlined,
+              'Transfer', const SelectPay()),
         ],
       ),
     );
@@ -158,25 +161,32 @@ class _DashboardState extends State<Dashboard> {
     );
   }
 
-  _buildButtonColumn(Color bgColor, IconData icon, String label) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(22)),
-        color: bgColor,
-      ),
-      height: 88,
-      width: 88,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            icon,
-            size: 42,
-            color: Colors.white,
-          ),
-          Text(label, style: focusStyle),
-        ],
+  _buildButtonColumn(
+      Color bgColor, IconData icon, String label, Widget screen) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => screen));
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(22)),
+          color: bgColor,
+        ),
+        height: 88,
+        width: 88,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              icon,
+              size: 42,
+              color: Colors.white,
+            ),
+            Text(label, style: focusStyle),
+          ],
+        ),
       ),
     );
   }

@@ -1,36 +1,53 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:wallet_rs/pay_amount.dart';
 
-class selectPay extends StatelessWidget {
-  const selectPay({Key? key}) : super(key: key);
+class SelectPay extends StatelessWidget {
+  const SelectPay({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var nameStyle = TextStyle(
+    var nameStyle = const TextStyle(
       fontWeight: FontWeight.w600,
       fontSize: 16,
     );
+    var pay = SelectPay();
     var namePlaceholder = Text(
       "Name",
       style: nameStyle,
     );
-    var placeHolder = SizedBox(height: 80, width: 80, child: Placeholder());
+
+    var placeHolder2 = CircleAvatar(
+      child: const Text("TBA"),
+      backgroundColor: Colors.orange[400],
+      radius: 64,
+    );
+
+    var tilePlaceholder = GestureDetector(
+        onTap: () {
+          //TODO: Navigate to next page
+          //Send payee info
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      PayTo(name: "TBA", tilePlaceholder: placeHolder2)));
+        },
+        child: Column(
+          children: [placeHolder2, namePlaceholder],
+        ));
+
     var selectionRow = Padding(
         padding: EdgeInsets.symmetric(vertical: 8),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Column(
-              children: [placeHolder, namePlaceholder],
-            ),
-            Column(
-              children: [placeHolder, namePlaceholder],
-            ),
-            Column(
-              children: [placeHolder, namePlaceholder],
-            )
+            tilePlaceholder,
+            tilePlaceholder,
+            tilePlaceholder,
           ],
         ));
+
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 52,
