@@ -25,7 +25,7 @@ class _DashboardState extends State<Dashboard> {
   Transaction transactionPlaceholder1 =
       Transaction(2532.54, false, "Top-up", DateTime.now());
   Transaction transactionPlaceholder2 =
-      Transaction(30.542, true, "To Sam", DateTime.now());
+      Transaction(30.54, true, "To Sam", DateTime.now());
 
   @override
   Widget build(BuildContext context) {

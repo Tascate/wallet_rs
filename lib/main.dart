@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: const Color(0xFFF1F1F6),
         textTheme: GoogleFonts.varelaRoundTextTheme(),
       ),
-      home: const TopUpChoose(),
+      home: const Dashboard(),
     );
   }
 }
