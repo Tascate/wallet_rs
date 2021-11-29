@@ -31,7 +31,7 @@ class SelectPay extends StatelessWidget {
               context,
               MaterialPageRoute(
                   builder: (context) =>
-                      PayTo(name: "TBA", tilePlaceholder: placeHolder2)));
+                      PayAmount(name: "TBA", tilePlaceholder: placeHolder2)));
         },
         child: Column(
           children: [placeHolder2, namePlaceholder],

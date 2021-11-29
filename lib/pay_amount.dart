@@ -3,8 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:wallet_rs/confirm_screen.dart';
 
-class PayTo extends StatelessWidget {
-  const PayTo({Key? key, required this.name, required this.tilePlaceholder})
+class PayAmount extends StatelessWidget {
+  const PayAmount({Key? key, required this.name, required this.tilePlaceholder})
       : super(key: key);
 
   final String name;
