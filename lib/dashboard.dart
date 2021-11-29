@@ -168,25 +168,36 @@ class _DashboardState extends State<Dashboard> {
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => screen));
       },
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(22)),
-          color: bgColor,
+      child: TextButton(
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(22)),
+            color: bgColor,
+          ),
+          height: 96,
+          width: 96,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Icon(
+                icon,
+                size: 42,
+                color: Colors.white,
+              ),
+              Text(label, style: focusStyle),
+            ],
+          ),
         ),
-        height: 88,
-        width: 88,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              icon,
-              size: 42,
-              color: Colors.white,
-            ),
-            Text(label, style: focusStyle),
-          ],
+        style: TextButton.styleFrom(
+          padding: const EdgeInsets.all(-8.0),
+          primary: Colors.white,
+          textStyle: const TextStyle(fontSize: 20),
         ),
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => screen));
+        },
       ),
     );
   }
