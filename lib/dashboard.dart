@@ -116,6 +116,8 @@ class _DashboardState extends State<Dashboard> {
       children: [
         _buildActivityRow(transactionPlaceholder1),
         _buildActivityRow(transactionPlaceholder2),
+        _buildActivityRow(transactionPlaceholder1),
+        _buildActivityRow(transactionPlaceholder2),
       ],
     );
 
