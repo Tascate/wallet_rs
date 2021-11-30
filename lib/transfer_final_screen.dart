@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'package:wallet_rs/confirm_screen.dart';
-import 'package:wallet_rs/transfer_choose_screen.dart';
+import 'package:wallet_rs/user.dart';
 
 class TransferFinal extends StatelessWidget {
   const TransferFinal(
@@ -18,6 +18,9 @@ class TransferFinal extends StatelessWidget {
         //TODO process top-up transaction
         //TODO append top-up transaction to list of transactions
         //TODO go to confirm screen + pass confirm msg with success/failure value
+
+        Provider.of<UserData>(context, listen: false)
+            .deductBalance(double.parse(amount));
         Navigator.push(
           context,
           MaterialPageRoute(
