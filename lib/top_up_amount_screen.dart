@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'package:wallet_rs/confirm_screen.dart';
+import 'package:wallet_rs/user.dart';
 
 class TopUpAmount extends StatefulWidget {
   const TopUpAmount({Key? key, required this.topUpIconChoice})
@@ -43,7 +45,9 @@ class _TopUpAmountState extends State<TopUpAmount> {
         //process top-up transaction
         //append top-up transaction to list of transactions
         //go to confirm screen + pass confirm msg with success/failure value
-        String amount = amountController.text;
+        var amount = double.parse(amountController.text);
+
+        Provider.of<UserData>(context, listen: false).topupBalance(amount);
 
         Navigator.of(context, rootNavigator: true).push(
           MaterialPageRoute(
