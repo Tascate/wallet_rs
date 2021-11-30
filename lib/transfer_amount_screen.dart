@@ -117,14 +117,14 @@ class _TransferAmountState extends State<TransferAmount> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const SizedBox(height: 96),
+          const SizedBox(height: 48),
           const Text(
             "How much to Transfer out?",
             style: TextStyle(
               fontSize: 22,
             ),
           ),
-          const SizedBox(height: 32),
+          const SizedBox(height: 16),
           inputTotal,
           const SizedBox(height: 32),
           nextButton,

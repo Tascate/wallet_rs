@@ -106,18 +106,18 @@ class _TopUpAmountState extends State<TopUpAmount> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(height: 96),
+          SizedBox(height: 48),
           Text(
             "How much to Top-up?",
             style: const TextStyle(
               fontSize: 22,
             ),
           ),
-          SizedBox(height: 32),
+          SizedBox(height: 16),
           widget.topUpIconChoice,
-          SizedBox(height: 32),
+          SizedBox(height: 16),
           inputTotal,
-          SizedBox(height: 32),
+          SizedBox(height: 16),
           nextButton,
         ],
       ),

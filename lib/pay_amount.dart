@@ -1,20 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'package:wallet_rs/confirm_screen.dart';
+import 'package:wallet_rs/user.dart';
 
-class PayAmount extends StatelessWidget {
-  const PayAmount({Key? key, required this.name, required this.tilePlaceholder})
+class PayAmount extends StatefulWidget {
+  PayAmount({Key? key, required this.name, required this.profilePicture})
       : super(key: key);
 
   final String name;
-  final Widget tilePlaceholder;
+  final Widget profilePicture;
+
+  @override
+  _PayAmountState createState() => _PayAmountState();
+}
+
+class _PayAmountState extends State<PayAmount> {
+  final amountController = TextEditingController();
+
+  @override
+  void dispose() {
+    amountController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     Widget inputTotal = Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: TextFormField(
+          controller: amountController,
           decoration: const InputDecoration(
             prefixIcon: Icon(Icons.attach_money_rounded),
             hintText: "0",
@@ -30,11 +46,15 @@ class PayAmount extends StatelessWidget {
         //process transaction
         //append transaction to list of transactions
         //go to confirm screen + pass confirm msg with success/failure value
+        var amount = double.parse(amountController.text);
+
+        Provider.of<UserData>(context, listen: false).deductBalance(amount);
+
         Navigator.push(
             context,
             MaterialPageRoute(
                 builder: (context) => ConfirmationScreen(
-                    confirmMessage: "\$256.25 sent to\n TBA", success: true)));
+                    confirmMessage: "\$$amount sent to\n TBA", success: true)));
         //confirmMessage: "Failed to send", success: false)));
       },
       child: Container(
@@ -62,7 +82,7 @@ class PayAmount extends StatelessWidget {
           elevation: 0,
           centerTitle: true,
           title: Text(
-            "Pay to " + name,
+            "Pay to " + widget.name,
             style: const TextStyle(
               fontWeight: FontWeight.w600,
               fontSize: 22,
@@ -81,17 +101,20 @@ class PayAmount extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(
-              height: 96,
+              height: 48,
             ),
             Text(
-              "How much to pay to " + name + "?",
+              "How much to pay to " + widget.name + "?",
               style: const TextStyle(
                 fontSize: 22,
               ),
             ),
-            tilePlaceholder,
             SizedBox(
-              height: 32,
+              height: 8,
+            ),
+            widget.profilePicture,
+            SizedBox(
+              height: 16,
             ),
             inputTotal,
             SizedBox(
