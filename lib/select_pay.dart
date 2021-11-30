@@ -24,18 +24,20 @@ class SelectPay extends StatelessWidget {
     );
 
     var tilePlaceholder = GestureDetector(
-        onTap: () {
-          //TODO: Navigate to next page
-          //Send payee info
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      PayAmount(name: "TBA", tilePlaceholder: placeHolder2)));
-        },
-        child: Column(
-          children: [placeHolder2, namePlaceholder],
-        ));
+      onTap: () {
+        //TODO: Navigate to next page
+        //Send payee info
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => PayAmount(
+                    name: "TBA",
+                    profilePicture: Hero(tag: "TBA", child: placeHolder2))));
+      },
+      child: Column(
+        children: [placeHolder2, namePlaceholder],
+      ),
+    );
 
     var selectionRow = Padding(
         padding: EdgeInsets.symmetric(vertical: 8),
@@ -54,7 +56,7 @@ class SelectPay extends StatelessWidget {
         elevation: 0,
         centerTitle: true,
         title: Text(
-          "Pay to...",
+          "Pay to",
           style: TextStyle(
             fontWeight: FontWeight.w600,
             fontSize: 22,
