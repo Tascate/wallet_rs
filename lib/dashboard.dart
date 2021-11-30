@@ -1,20 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' as intl;
+import 'package:provider/provider.dart';
 import 'package:wallet_rs/select_pay.dart';
 import 'package:wallet_rs/top_up_choose_screen.dart';
 import 'transaction.dart';
 import 'user.dart';
 
 class Dashboard extends StatefulWidget {
-  const Dashboard({Key? key}) : super(key: key);
+  Dashboard({Key? key}) : super(key: key);
 
   @override
   _DashboardState createState() => _DashboardState();
 }
 
 class _DashboardState extends State<Dashboard> {
-  User theUser = User("K.B.", 4512521.42);
   Color themeColor = const Color(0xff4AB94A);
   Color lessThemeColor = const Color(0xff34A334);
   TextStyle focusStyle = const TextStyle(
@@ -46,9 +46,11 @@ class _DashboardState extends State<Dashboard> {
             alignment: Alignment.centerRight,
             child: Padding(
               padding: const EdgeInsets.only(right: 16, top: 8),
-              child: Text(
-                theUser.name,
-                style: focusStyle,
+              child: Consumer<UserData>(
+                builder: (context, userData, child) => Text(
+                  userData.name,
+                  style: focusStyle,
+                ),
               ),
             ),
           ),
@@ -67,9 +69,12 @@ class _DashboardState extends State<Dashboard> {
             "Balance",
             style: focusStyle,
           ),
-          Text(
-            '\$' + intl.NumberFormat.decimalPattern().format(theUser.balance),
-            style: mainStyle,
+          Consumer<UserData>(
+            builder: (context, userData, child) => Text(
+              '\$' +
+                  intl.NumberFormat.decimalPattern().format(userData.balance),
+              style: mainStyle,
+            ),
           ),
         ],
       ),

@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:wallet_rs/select_pay.dart';
 import 'package:wallet_rs/top_up_choose_screen.dart';
 import 'package:wallet_rs/transfer_amount_screen.dart';
+import 'package:wallet_rs/user.dart';
 import 'dashboard.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => UserData(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -30,7 +37,7 @@ class MyApp extends StatelessWidget {
         '/topup': (context) => TopUpChoose(),
         '/transfer': (context) => TransferAmount(),
       },
-      home: const Dashboard(),
+      home: Dashboard(),
     );
   }
 }
