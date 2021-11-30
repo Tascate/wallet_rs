@@ -42,9 +42,9 @@ class _TopUpAmountState extends State<TopUpAmount> {
 
     var nextButton = GestureDetector(
       onTap: () {
-        //process top-up transaction
-        //append top-up transaction to list of transactions
-        //go to confirm screen + pass confirm msg with success/failure value
+        //TODO process top-up transaction
+        //TODO append top-up transaction to list of transactions
+        //TODO go to confirm screen + pass confirm msg with success/failure value
         var amount = double.parse(amountController.text);
 
         Provider.of<UserData>(context, listen: false).topupBalance(amount);
