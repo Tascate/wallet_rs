@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wallet_rs/transaction.dart';
+import 'package:wallet_rs/actvitiy.dart';
 
 class ConfirmationScreen extends StatelessWidget {
   const ConfirmationScreen(
