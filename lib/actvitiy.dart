@@ -1,37 +1,40 @@
 import 'dart:collection';
 import 'package:flutter/cupertino.dart';
 
-class Transaction implements Comparable<Transaction> {
+class Activity implements Comparable<Activity> {
   double money;
   String title;
   DateTime timestamp;
   bool isSpending;
 
-  Transaction(this.money, this.isSpending, this.title, this.timestamp);
+  Activity(this.money, this.isSpending, this.title, this.timestamp);
 
+  //Transactions are sorted by timestamps
   @override
-  int compareTo(Transaction rhs) => timestamp.compareTo(rhs.timestamp);
+  int compareTo(Activity rhs) => rhs.timestamp.compareTo(timestamp);
 }
 
-class TransactionModel extends ChangeNotifier {
-  final List<Transaction> transactions = [];
+class ActivityList extends ChangeNotifier {
+  final List<Activity> transactions = [];
 
   //Get unmodifiable view of transaction list
-  UnmodifiableListView<Transaction> get items =>
+  UnmodifiableListView<Activity> get items =>
       UnmodifiableListView(transactions);
 
   //length of transactions
   int get numTransactions => transactions.length;
 
+  //Adds transaction to list
+  //The list usually sorted at runtime
   void addTransaction(
       double money, String title, DateTime timestamp, bool isSpending) {
-    var newTransaction = Transaction(money, isSpending, title, timestamp);
+    var newTransaction = Activity(money, isSpending, title, timestamp);
     transactions.add(newTransaction);
     transactions.sort();
     notifyListeners();
   }
 
-  void quickAdd(Transaction newTransaction) {
+  void quickAdd(Activity newTransaction) {
     transactions.add(newTransaction);
     transactions.sort();
     notifyListeners();
