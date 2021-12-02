@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
+import 'package:wallet_rs/actvitiy.dart';
 import 'package:wallet_rs/confirm_screen.dart';
 import 'package:wallet_rs/user.dart';
 
@@ -18,9 +19,14 @@ class TransferFinal extends StatelessWidget {
         //TODO process top-up transaction
         //TODO append top-up transaction to list of transactions
         //TODO go to confirm screen + pass confirm msg with success/failure value
+        var amountTransferredOut = double.parse(amount);
 
         Provider.of<UserData>(context, listen: false)
-            .deductBalance(double.parse(amount));
+            .deductBalance(amountTransferredOut);
+
+        Provider.of<ActivityList>(context, listen: false).addTransaction(
+            amountTransferredOut, "Transfer Out", DateTime.now(), true);
+
         Navigator.push(
           context,
           MaterialPageRoute(

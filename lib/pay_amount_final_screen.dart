@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:wallet_rs/actvitiy.dart';
 import 'package:wallet_rs/confirm_screen.dart';
 import 'package:wallet_rs/user.dart';
 
@@ -48,7 +49,11 @@ class _PayAmountState extends State<PayAmount> {
         //go to confirm screen + pass confirm msg with success/failure value
         var amount = double.parse(amountController.text);
 
+        var payee = widget.name;
+
         Provider.of<UserData>(context, listen: false).deductBalance(amount);
+        Provider.of<ActivityList>(context, listen: false)
+            .addTransaction(amount, "To $payee", DateTime.now(), true);
 
         Navigator.push(
             context,

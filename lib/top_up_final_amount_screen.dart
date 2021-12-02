@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:wallet_rs/actvitiy.dart';
 import 'package:wallet_rs/confirm_screen.dart';
 import 'package:wallet_rs/user.dart';
 
@@ -48,6 +49,9 @@ class _TopUpAmountState extends State<TopUpAmount> {
         var amount = double.parse(amountController.text);
 
         Provider.of<UserData>(context, listen: false).topupBalance(amount);
+
+        Provider.of<ActivityList>(context, listen: false)
+            .addTransaction(amount, "Top-Up", DateTime.now(), false);
 
         Navigator.of(context, rootNavigator: true).push(
           MaterialPageRoute(

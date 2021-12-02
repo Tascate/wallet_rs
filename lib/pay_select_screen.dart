@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:wallet_rs/pay_amount.dart';
+import 'package:wallet_rs/pay_amount_final_screen.dart';
 
 class SelectPay extends StatelessWidget {
   const SelectPay({Key? key}) : super(key: key);
