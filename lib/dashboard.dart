@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' as intl;
 import 'package:provider/provider.dart';
-import 'package:wallet_rs/select_pay.dart';
+import 'package:wallet_rs/pay_select_screen.dart';
 import 'package:wallet_rs/top_up_choose_screen.dart';
-import 'transaction.dart';
+import 'actvitiy.dart';
 import 'user.dart';
 
 class Dashboard extends StatefulWidget {
@@ -15,6 +15,8 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
+  //TODO move these into a universal file that all files can use
+  //Temporary variables
   Color themeColor = const Color(0xff4AB94A);
   Color lessThemeColor = const Color(0xff34A334);
   TextStyle focusStyle = const TextStyle(
@@ -22,13 +24,20 @@ class _DashboardState extends State<Dashboard> {
   TextStyle mainStyle = const TextStyle(
       color: Colors.white, fontSize: 30, fontWeight: FontWeight.w700);
 
-  Transaction transactionPlaceholder1 =
-      Transaction(2532.54, false, "Top-up", DateTime.now());
-  Transaction transactionPlaceholder2 =
-      Transaction(30.54, true, "To Sam", DateTime.now());
+  //placeholder variables to test transaction widget
+
+  Activity transactionPlaceholder1 =
+      Activity(2532.54, false, "Top-up", DateTime.now());
+  Activity transactionPlaceholder2 =
+      Activity(30.54, true, "To Sam", DateTime.now());
 
   @override
   Widget build(BuildContext context) {
+    //TODO serialize and deserialize Transaction data
+    //Testing Transaction Model default data
+    //Provider.of<ActivityList>(context, listen: false).quickAdd(transactionPlaceholder1);
+    //Provider.of<ActivityList>(context, listen: false).quickAdd(transactionPlaceholder2);
+
     Widget topBar = SizedBox(
       height: 36,
       child: Row(
@@ -118,8 +127,15 @@ class _DashboardState extends State<Dashboard> {
         _buildActivityRow(transactionPlaceholder2),
         _buildActivityRow(transactionPlaceholder1),
         _buildActivityRow(transactionPlaceholder2),
+        _buildActivityRow(transactionPlaceholder2),
+        _buildActivityRow(transactionPlaceholder2),
+        _buildActivityRow(transactionPlaceholder2),
+        _buildActivityRow(transactionPlaceholder2),
+        _buildActivityRow(transactionPlaceholder2),
       ],
     );
+
+    //Widget activityList = ListView.builder(itemBuilder: null);
 
     Widget bottomSection = Container(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
@@ -197,7 +213,7 @@ class _DashboardState extends State<Dashboard> {
     );
   }
 
-  _buildActivityRow(Transaction data) {
+  _buildActivityRow(Activity data) {
     IconData splash = Icons.arrow_circle_down_rounded;
     Color? splashBGcolor = Colors.red;
     Color moneyTextColor = splashBGcolor;
@@ -208,7 +224,7 @@ class _DashboardState extends State<Dashboard> {
       moneyTextColor = Colors.green;
       prefix = "+\$";
     }
-    return Padding(
+    return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Row(
         children: [
