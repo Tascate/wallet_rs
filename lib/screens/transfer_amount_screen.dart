@@ -1,22 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
-import 'package:wallet_rs/actvitiy.dart';
-import 'package:wallet_rs/confirm_screen.dart';
-import 'package:wallet_rs/user.dart';
+import 'package:wallet_rs/screens/confirm_screen.dart';
+import 'package:wallet_rs/screens/transfer_choose_screen.dart';
 
-class TopUpAmount extends StatefulWidget {
-  const TopUpAmount({Key? key, required this.topUpIconChoice})
-      : super(key: key);
-  final Widget topUpIconChoice;
+class TransferAmount extends StatefulWidget {
+  TransferAmount({Key? key}) : super(key: key);
 
   @override
-  _TopUpAmountState createState() => _TopUpAmountState();
+  _TransferAmountState createState() => _TransferAmountState();
 }
 
-class _TopUpAmountState extends State<TopUpAmount> {
+class _TransferAmountState extends State<TransferAmount> {
   final amountController = TextEditingController();
+  bool enabled = false;
+
+  @override
+  void initState() {
+    super.initState();
+    amountController.addListener(
+      () {
+        //TODO add input handling method to enable buttpn
+        String amount = amountController.text;
+        toggleButton(true);
+      },
+    );
+  }
+
+  void toggleButton(bool toggleMode) {
+    setState(() {
+      enabled = toggleMode;
+    });
+  }
 
   @override
   void dispose() {
@@ -35,40 +50,34 @@ class _TopUpAmountState extends State<TopUpAmount> {
         ),
         keyboardType: const TextInputType.numberWithOptions(decimal: true),
         inputFormatters: [
-          FilteringTextInputFormatter.allow(RegExp('[0-9,.]')),
+          FilteringTextInputFormatter.allow(RegExp('[0-9,.]+')),
         ],
         controller: amountController,
+        validator: (value) => value!.isEmpty ? "Enter an amount" : null,
       ),
     );
 
     var nextButton = GestureDetector(
-      onTap: () {
-        //TODO process top-up transaction
-        //TODO append top-up transaction to list of transactions
-        //TODO go to confirm screen + pass confirm msg with success/failure value
-        var amount = double.parse(amountController.text);
+      onTap: enabled
+          ? () {
+              String amount = amountController.text;
 
-        Provider.of<UserData>(context, listen: false).topupBalance(amount);
-
-        Provider.of<ActivityList>(context, listen: false)
-            .addTransaction(amount, "Top-Up", DateTime.now(), false);
-
-        Navigator.of(context, rootNavigator: true).push(
-          MaterialPageRoute(
-            builder: (context) => ConfirmationScreen(
-                confirmMessage: "\$$amount\n added to balance", success: true),
-            //confirmMessage: "Failed to top-up", success: false),
-          ),
-        );
-      },
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => TransferChoose(amount: amount),
+                ),
+              );
+            }
+          : null,
       child: Container(
         height: 40,
         width: double.maxFinite,
         margin: const EdgeInsets.symmetric(horizontal: 16),
         alignment: Alignment.center,
-        decoration: const BoxDecoration(
-          color: Colors.green,
-          borderRadius: BorderRadius.all(Radius.circular(22)),
+        decoration: BoxDecoration(
+          color: enabled ? Colors.green : Colors.green.withOpacity(0.3),
+          borderRadius: const BorderRadius.all(Radius.circular(22)),
         ),
         child: const Text(
           "Send",
@@ -89,7 +98,7 @@ class _TopUpAmountState extends State<TopUpAmount> {
             elevation: 0,
             centerTitle: true,
             title: const Text(
-              "Top-up",
+              "Transfer",
               style: TextStyle(
                 fontWeight: FontWeight.w600,
                 fontSize: 22,
@@ -110,18 +119,16 @@ class _TopUpAmountState extends State<TopUpAmount> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(height: 48),
-          Text(
-            "How much to Top-up?",
-            style: const TextStyle(
+          const SizedBox(height: 48),
+          const Text(
+            "How much to Transfer out?",
+            style: TextStyle(
               fontSize: 22,
             ),
           ),
-          SizedBox(height: 16),
-          widget.topUpIconChoice,
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           inputTotal,
-          SizedBox(height: 16),
+          const SizedBox(height: 32),
           nextButton,
         ],
       ),

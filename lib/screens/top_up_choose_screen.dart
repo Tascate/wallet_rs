@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wallet_rs/top_up_final_amount_screen.dart';
+import 'package:wallet_rs/screens/top_up_final_amount_screen.dart';
 
 class TopUpChoose extends StatelessWidget {
   const TopUpChoose({Key? key}) : super(key: key);

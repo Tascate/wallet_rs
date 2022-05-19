@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wallet_rs/transfer_final_screen.dart';
+import 'package:wallet_rs/screens/transfer_final_screen.dart';
 import 'confirm_screen.dart';
 
 class TransferChoose extends StatelessWidget {

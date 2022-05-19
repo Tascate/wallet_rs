@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
-import 'package:wallet_rs/actvitiy.dart';
-import 'package:wallet_rs/confirm_screen.dart';
-import 'package:wallet_rs/user.dart';
+import 'package:wallet_rs/data/actvitiy.dart';
+import 'package:wallet_rs/screens/confirm_screen.dart';
+import 'package:wallet_rs/data/user.dart';
 
 class TransferFinal extends StatelessWidget {
   const TransferFinal(
@@ -21,7 +21,7 @@ class TransferFinal extends StatelessWidget {
         //TODO go to confirm screen + pass confirm msg with success/failure value
         var amountTransferredOut = double.parse(amount);
 
-        Provider.of<UserData>(context, listen: false)
+        Provider.of<User>(context, listen: false)
             .deductBalance(amountTransferredOut);
 
         Provider.of<ActivityList>(context, listen: false).addTransaction(

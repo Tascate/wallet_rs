@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:wallet_rs/actvitiy.dart';
-import 'package:wallet_rs/confirm_screen.dart';
-import 'package:wallet_rs/user.dart';
+import 'package:wallet_rs/data/actvitiy.dart';
+import 'package:wallet_rs/screens/confirm_screen.dart';
+import 'package:wallet_rs/data/user.dart';
 
 class PayAmount extends StatefulWidget {
   PayAmount({Key? key, required this.name, required this.profilePicture})
@@ -51,7 +51,7 @@ class _PayAmountState extends State<PayAmount> {
 
         var payee = widget.name;
 
-        Provider.of<UserData>(context, listen: false).deductBalance(amount);
+        Provider.of<User>(context, listen: false).deductBalance(amount);
         Provider.of<ActivityList>(context, listen: false)
             .addTransaction(amount, "To $payee", DateTime.now(), true);
 
@@ -59,7 +59,8 @@ class _PayAmountState extends State<PayAmount> {
             context,
             MaterialPageRoute(
                 builder: (context) => ConfirmationScreen(
-                    confirmMessage: "\$$amount sent to\n TBA", success: true)));
+                    confirmMessage: "\$$amount sent to\n $payee",
+                    success: true)));
         //confirmMessage: "Failed to send", success: false)));
       },
       child: Container(
