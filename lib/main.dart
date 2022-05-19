@@ -1,21 +1,19 @@
-import 'dart:js';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:wallet_rs/pay_select_screen.dart';
-import 'package:wallet_rs/top_up_choose_screen.dart';
-import 'package:wallet_rs/actvitiy.dart';
-import 'package:wallet_rs/transfer_amount_screen.dart';
-import 'package:wallet_rs/user.dart';
+import 'package:wallet_rs/screens/pay_select_screen.dart';
+import 'package:wallet_rs/screens/top_up_choose_screen.dart';
+import 'package:wallet_rs/data/actvitiy.dart';
+import 'package:wallet_rs/screens/transfer_amount_screen.dart';
+import 'package:wallet_rs/data/user.dart';
 import 'dashboard.dart';
 
 void main() {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => UserData()),
+        ChangeNotifierProvider(create: (context) => User("K", "B", 500)),
         ChangeNotifierProvider(create: (context) => ActivityList())
       ],
       child: const MyApp(),

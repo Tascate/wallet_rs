@@ -2,10 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' as intl;
 import 'package:provider/provider.dart';
-import 'package:wallet_rs/pay_select_screen.dart';
-import 'package:wallet_rs/top_up_choose_screen.dart';
-import 'actvitiy.dart';
-import 'user.dart';
+import 'package:wallet_rs/screens/activity_screen.dart';
+import 'package:wallet_rs/screens/pay_select_screen.dart';
+import 'package:wallet_rs/screens/top_up_choose_screen.dart';
+import 'data/actvitiy.dart';
+import 'data/user.dart';
 
 class Dashboard extends StatefulWidget {
   Dashboard({Key? key}) : super(key: key);
@@ -37,6 +38,8 @@ class _DashboardState extends State<Dashboard> {
     //Testing Transaction Model default data
     //Provider.of<ActivityList>(context, listen: false).quickAdd(transactionPlaceholder1);
     //Provider.of<ActivityList>(context, listen: false).quickAdd(transactionPlaceholder2);
+    List<Activity> list =
+        Provider.of<ActivityList>(context, listen: true).transactions;
 
     Widget topBar = SizedBox(
       height: 36,
@@ -55,9 +58,9 @@ class _DashboardState extends State<Dashboard> {
             alignment: Alignment.centerRight,
             child: Padding(
               padding: const EdgeInsets.only(right: 16, top: 8),
-              child: Consumer<UserData>(
+              child: Consumer<User>(
                 builder: (context, userData, child) => Text(
-                  userData.name,
+                  userData.firstName,
                   style: focusStyle,
                 ),
               ),
@@ -78,7 +81,7 @@ class _DashboardState extends State<Dashboard> {
             "Balance",
             style: focusStyle,
           ),
-          Consumer<UserData>(
+          Consumer<User>(
             builder: (context, userData, child) => Text(
               '\$' +
                   intl.NumberFormat.decimalPattern().format(userData.balance),
@@ -121,19 +124,20 @@ class _DashboardState extends State<Dashboard> {
       ),
     );
 
-    Widget activitySection = Column(
-      children: [
-        _buildActivityRow(transactionPlaceholder1),
-        _buildActivityRow(transactionPlaceholder2),
-        _buildActivityRow(transactionPlaceholder1),
-        _buildActivityRow(transactionPlaceholder2),
-        _buildActivityRow(transactionPlaceholder2),
-        _buildActivityRow(transactionPlaceholder2),
-        _buildActivityRow(transactionPlaceholder2),
-        _buildActivityRow(transactionPlaceholder2),
-        _buildActivityRow(transactionPlaceholder2),
-      ],
-    );
+    _buildActivitySection() {
+      List<Widget> hi = [];
+      int i = 0;
+      while (i < list.length && i < 5) {
+        hi.add(_buildActivityRow(list[i]));
+        i++;
+      }
+      return Column(
+        children: hi,
+      );
+      ;
+    }
+
+    Widget activitySection = _buildActivitySection();
 
     //Widget activityList = ListView.builder(itemBuilder: null);
 
@@ -149,7 +153,7 @@ class _DashboardState extends State<Dashboard> {
             padding: const EdgeInsets.only(
                 bottom: 8.0, top: 16.0, left: 16, right: 16),
             child: Row(
-              children: const [
+              children: [
                 Text(
                   "Recent Activity",
                   style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
@@ -157,9 +161,17 @@ class _DashboardState extends State<Dashboard> {
                 Spacer(),
                 Align(
                   alignment: Alignment.centerRight,
-                  child: Text(
-                    "View all",
-                    style: TextStyle(color: Colors.blueAccent, fontSize: 16),
+                  child: TextButton(
+                    child: Text(
+                      "View all",
+                      style: TextStyle(color: Colors.blueAccent, fontSize: 16),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ActivityScreen()));
+                    },
                   ),
                 ),
               ],
@@ -261,7 +273,7 @@ class _DashboardState extends State<Dashboard> {
             ),
           ),
           Text(
-            prefix + intl.NumberFormat.decimalPattern().format(data.money),
+            prefix + intl.NumberFormat.decimalPattern().format(data.amount),
             style: TextStyle(fontSize: 16, color: moneyTextColor),
           ),
         ],
