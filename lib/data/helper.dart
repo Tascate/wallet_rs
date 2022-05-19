@@ -38,14 +38,8 @@ Future<String> readActivity() async {
 
 //write out ActivityList to file
 Future<File> writeActivity(List<Activity> activityList) async {
-  for (int i = 0; i < activityList.length; i++) {
-    print(activityList[i].title);
-  }
-  print("encoding");
   String jsonData = jsonEncode(activityList);
-  print("finished");
   final path = await getApplicationDocumentsDirectory();
-  print("$path/activity.json");
   final file = await File('$path/activity.json').create(recursive: true);
 
   return file.writeAsString(jsonData);
